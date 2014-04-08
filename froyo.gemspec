@@ -8,7 +8,9 @@ Gem::Specification.new do |s|
   s.summary = 'Fluent Ruby Objects, Yo!'
   s.description = 'Your wildest dreams have come true! Fluent ruby objects!'
   s.files = ['lib/froyo.rb',
-             'spec/lib/froyo_spec.rb']
+             'spec/lib/froyo_spec.rb',
+             'LICENSE',
+             'README.md']
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
