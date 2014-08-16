@@ -29,12 +29,12 @@ describe FroYo do
       end
 
       it 'does not respond to that method, beginning with an underscore' do
-        ExtendsFroYo.new.should_not respond_to(:_not_fluent)
+        expect(ExtendsFroYo.new).not_to respond_to(:_not_fluent)
       end
 
       it 'does not return that instance' do
         instance = ExtendsFroYo.new
-        instance.not_fluent.should_not be_equal(instance)
+        expect(instance.not_fluent).to_not be_equal(instance)
       end
 
     end
@@ -49,23 +49,23 @@ describe FroYo do
       end
 
       it 'responds to that method with an underscore' do
-        ExtendsFroYo.new.should respond_to(:_no_param_fluent)
+        expect(ExtendsFroYo.new).to respond_to(:_no_param_fluent)
       end
 
       it 'calls the original method, when the underscored version is called' do
         instance = ExtendsFroYo.new
-        instance.should_receive(:no_param_fluent)
+        expect(instance).to receive(:no_param_fluent)
         instance._no_param_fluent
       end
 
       it 'returns that instance' do
         instance = ExtendsFroYo.new
-        instance._no_param_fluent.should be_equal(instance)
+        expect(instance._no_param_fluent).to eq(instance)
       end
 
       it 'returns that instance even when multiple calls are chained' do
         instance = ExtendsFroYo.new
-        instance._no_param_fluent._no_param_fluent._no_param_fluent.should be_equal(instance)
+        expect(instance._no_param_fluent._no_param_fluent._no_param_fluent).to eq(instance)
       end
 
     end
@@ -81,7 +81,7 @@ describe FroYo do
 
       it 'calls the original with the passed params' do
         instance = ExtendsFroYo.new
-        instance.should_receive(:multi_param_fluent).with('foo val', 'bar val')
+        expect(instance).to receive(:multi_param_fluent).with('foo val', 'bar val')
         instance._multi_param_fluent('foo val', 'bar val')
       end
 
@@ -98,7 +98,7 @@ describe FroYo do
 
       it 'calls the original with the passed params' do
         instance = ExtendsFroYo.new
-        instance.should_receive(:inf_arity_fluent).with(1, 2, 3, 4)
+        expect(instance).to receive(:inf_arity_fluent).with(1, 2, 3, 4)
         instance._inf_arity_fluent(1, 2, 3, 4)
       end
 
@@ -118,7 +118,7 @@ describe FroYo do
         some_block = lambda do |x, y, z|
           puts 'never called'
         end
-        instance.should_receive(:accepts_block_fluent).with(some_block)
+        expect(instance).to receive(:accepts_block_fluent).with(some_block)
         instance._accepts_block_fluent(some_block)
       end
 
@@ -136,7 +136,7 @@ describe FroYo do
       it 'receives the original with all the passed params' do
         instance = ExtendsFroYo.new
         some_block = ->(x, y, z) {}
-        instance.should_receive(:accepts_lots_fluent).with(1, 2, 3, some_block)
+        expect(instance).to receive(:accepts_lots_fluent).with(1, 2, 3, some_block)
         instance._accepts_lots_fluent(1, 2, 3, some_block)
       end
 
@@ -155,17 +155,16 @@ describe FroYo do
       end
 
       it 'responds to all methods that were defined as being fluent' do
-        ExtendsFroYo.new.should respond_to(:_foo)
-        ExtendsFroYo.new.should respond_to(:_bar)
+        expect(ExtendsFroYo.new).to respond_to(:_foo)
+        expect(ExtendsFroYo.new).to respond_to(:_bar)
       end
 
       it 'returns the instance when multiple, alternating chainings are done' do
         instance = ExtendsFroYo.new
-        instance._foo
+        expect(instance._foo
                 ._bar
                 ._foo
-                ._bar.should equal(instance)
-          
+                ._bar).to eq(instance)
       end
 
     end
