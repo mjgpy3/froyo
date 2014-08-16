@@ -1,6 +1,8 @@
 froyo
 =====
 
+[![Build Status](https://travis-ci.org/mjgpy3/froyo.svg?branch=master)](https://travis-ci.org/mjgpy3/froyo)
+
 Fluent Ruby Objects, Yo!
 
 Description
